@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-import axios from "../services/api";
+import React, { useEffect, useState } from 'react';
+import API from '../services/api'; // Import API từ file config
 
-const BrandFilter = ({ onSelectBrand }) => {
+const BrandFilter = () => {
   const [brands, setBrands] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState("");
 
   useEffect(() => {
-    axios.get("/brands")
-      .then(response => setBrands(response.data))
-      .catch(error => console.error("Error fetching brands:", error));
+    API.get('/brands')
+      .then(response => {
+        setBrands(response.data); // Lưu dữ liệu vào state
+      })
+      .catch(error => {
+        console.error('Error fetching brands:', error); // Log lỗi nếu có
+      });
   }, []);
 
   return (
-    <FormControl fullWidth>
-      <InputLabel>Filter by Brand</InputLabel>
-      <Select
-        value={selectedBrand || ""} // Đảm bảo giá trị mặc định là ""
-        onChange={(e) => {
-          setSelectedBrand(e.target.value);
-          onSelectBrand(e.target.value);
-        }}
-      >
-        <MenuItem value="">All</MenuItem>
-        {brands.map((brand) => (
-          <MenuItem key={brand._id} value={brand._id}>
-            {brand.brandName}
-          </MenuItem>
+    <div>
+      <h2>Brands</h2>
+      <ul>
+        {brands.map(brand => (
+          <li key={brand._id}>{brand.brandName}</li> // Hiển thị danh sách brands
         ))}
-      </Select>
-    </FormControl>
+      </ul>
+    </div>
   );
 };
 

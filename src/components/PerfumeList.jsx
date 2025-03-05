@@ -16,7 +16,10 @@ const PerfumeList = () => {
           <Card>
             <CardContent>
               <Typography variant="h6">{perfume.perfumeName}</Typography>
-              <Typography variant="body2">Brand: {perfume.brand.brandName}</Typography>
+              <Typography variant="body2">
+  Brand: {perfume.brand?.brandName || "No brand available"}
+</Typography>
+
             </CardContent>
           </Card>
         </Grid>
