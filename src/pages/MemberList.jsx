@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../services/api";
 import { Container, Typography, List, ListItem, ListItemText, Button, Card, CardContent } from "@mui/material";
 
-const CollectorList = () => {
+const MemberList = () => {
   const [members, setMembers] = useState([]);
   const [error, setError] = useState("");
 
@@ -15,10 +15,9 @@ const CollectorList = () => {
           return;
         }
 
-        const response = await axios.get("/members/collectors", {  
-          headers: { Authorization: `Bearer ${token}` },
-      });
-      
+        const response = await axios.get("/api/members/collectors", { 
+          headers: { Authorization: `Bearer ${token}` }, // 🛠️ Sửa header thành Authorization
+        });
 
         setMembers(response.data);
       } catch (err) {
@@ -60,4 +59,4 @@ const CollectorList = () => {
   );
 };
 
-export default CollectorList;
+export default MemberList;

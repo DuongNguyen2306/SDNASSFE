@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { CssBaseline, Container } from "@mui/material";
 import Header from "./components/Header";
@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import PerfumeDetails from "./pages/PerfumeDetails";
 import AdminDashboard from "./pages/AdminDashboard";
-import CollectorList from "./pages/CollectorList";
+import CollectorList from "./pages/CollectorList"; // ✅ Import trang quản lý thành viên
 import BrandManagement from "./pages/BrandManagement";
 import PerfumeManagement from "./pages/PerfumeManagement";
 import { AuthProvider, useAuth } from "./context/AuthContext";
@@ -37,7 +37,7 @@ const App = () => {
             <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
             <Route path="/perfume/:id" element={<PerfumeDetails />} />
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-            <Route path="/collectors" element={<AdminRoute><CollectorList /></AdminRoute>} />
+            <Route path="/collectors" element={<AdminRoute><CollectorList /></AdminRoute>} /> {/* ✅ Chỉ Admin mới thấy */}
             <Route path="/admin/brands" element={<AdminRoute><BrandManagement /></AdminRoute>} />
             <Route path="/admin/perfumes" element={<AdminRoute><PerfumeManagement /></AdminRoute>} />
           </Routes>
